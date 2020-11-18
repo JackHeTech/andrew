@@ -7,12 +7,28 @@
 
 const ALL_UPCOMING_EVENTS = [
     {
-        "title":"Vancouver Learning Network Panel Discussion",
-        "location":"John Oliver Secondary School, East 41st Avenue, Vancouver, BC",
+        "title":"Project 1",
+        "location":"",
         "date":"March 12, 2020",
         "time":"6:30pm - 8pm",
-        "imageUrl":"images/highschool.jpg",
-        "url":"contact.html"
+        "imageUrl":"images/2.jpeg",
+        "url":""
+    },
+    {
+        "title":"Project 2",
+        "location":"",
+        "date":"March 12, 2020",
+        "time":"6:30pm - 8pm",
+        "imageUrl":"images/4.jpg",
+        "url":""
+    },
+    {
+        "title":"Project 3",
+        "location":"",
+        "date":"March 12, 2020",
+        "time":"6:30pm - 8pm",
+        "imageUrl":"images/5.jpg",
+        "url":""
     }
 ]
 
@@ -52,7 +68,7 @@ function ContainerForEvents(props) {
 function UpdateTitle() {
     return (
         <div>
-            Incline Education
+            ANDREW WONG
         </div>
     )
 }
@@ -60,7 +76,7 @@ function UpdateTitle() {
 function UpdateSubTitle() {
     return (
         <div>
-            Helping Students Find Lasting Success
+            Film making, photography
         </div>
     )
 }
