@@ -4,49 +4,46 @@
     We update / add new events here. 
 */
 
+fetch('https://api-andrew.herokuapp.com/getdata')
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        alert("could not load data")
+        return;
+      }
 
-const ALL_UPCOMING_EVENTS = [
-    {
-        "title":"Project 1",
-        "location":"",
-        "date":"March 12, 2020",
-        "time":"6:30pm - 8pm",
-        "imageUrl":"images/2.jpeg",
-        "url":""
-    },
-    {
-        "title":"Project 2",
-        "location":"",
-        "date":"March 12, 2020",
-        "time":"6:30pm - 8pm",
-        "imageUrl":"images/4.jpg",
-        "url":""
-    },
-    {
-        "title":"Project 3",
-        "location":"",
-        "date":"March 12, 2020",
-        "time":"6:30pm - 8pm",
-        "imageUrl":"images/5.jpg",
-        "url":""
+    //   Examine the text in the response
+      response.json().then(function(data) {
+        console.log(data);
+        render(data)
+      });
     }
-]
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+    alert("could not load data")
+  });
 
+
+function goTo() {
+  alert("go to")
+}
 
 function Event(props) {
-    return (
-        <div className="col-sm-6 col-md-6 col-lg-6" data-aos="fade" data-aos-delay="100" style = {{float:"left"}}>
-          <a href= {props.url} className="work-thumb">
-            <div className="work-text">
-              <h2>{props.title}</h2>
-              <p>{props.location}</p>
-              <p>{props.date}</p>
-              <p>{props.time}</p>
-            </div>
-            <img src={props.imageUrl} alt="Image" className="img-fluid"></img>
-          </a>
-        </div>
-    )
+  console.log(props.videoUrl)
+  return (
+      <div className="col-sm-6 col-md-6 col-lg-6" data-aos="fade" data-aos-delay="100" style = {{float:"left"}}>
+        <a href= {props.videoUrl} className="work-thumb" target = "_blank" onclick = "goTo()">
+          <div className="work-text">
+            <h2>{props.title}</h2>
+            <p>{props.description}</p>
+          </div>
+          <img src={props.imageUrl} alt="Image" className="img-fluid"></img>
+        </a>
+      </div>
+  )
 }
  
 function ContainerForEvents(props) {
@@ -54,34 +51,14 @@ function ContainerForEvents(props) {
         <div>
             {props.listOfEvents.map((event) => {
                 return (
-                    <Event title = {event.title} location = {event.location} date = {event.date} time = {event.time} imageUrl = {event.imageUrl} url = {event.url} />
+                    <Event title = {event.title} description = {event.description} imageUrl = {event.imageUrl} videoUrl = {event.videoUrl} />
                 )
             })}
         </div>
     )
 }
 
-
-
-
-// CHANGE THE MAIN TITLE 
-function UpdateTitle() {
-    return (
-        <div>
-            ANDREW WONG
-        </div>
-    )
+const render = (data) => {
+    const ALL_UPCOMING_EVENTS = data.projects
+    ReactDOM.render(<ContainerForEvents listOfEvents = {ALL_UPCOMING_EVENTS}/>, document.getElementById("events"))
 }
-// CHANGE THE SUB TITLE
-function UpdateSubTitle() {
-    return (
-        <div>
-            Film making, photography
-        </div>
-    )
-}
-
-
-ReactDOM.render(<UpdateTitle />, document.getElementById("title"))
-ReactDOM.render(<UpdateSubTitle />, document.getElementById("subtitle"))
-ReactDOM.render(<ContainerForEvents listOfEvents = {ALL_UPCOMING_EVENTS}/>, document.getElementById("events"))
